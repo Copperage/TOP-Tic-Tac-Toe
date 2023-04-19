@@ -40,6 +40,7 @@ main {
 	border-left: 1px solid black;
 	border-bottom: 1px solid black;
 	background-color: rgb(255, 255, 255);
+	border-style: solid;
 }
 
 .box:hover {
