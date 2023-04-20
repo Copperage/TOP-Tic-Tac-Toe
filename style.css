@@ -41,6 +41,7 @@ main {
 	border-bottom: 1px solid black;
 	background-color: rgb(255, 255, 255);
 	border-style: solid;
+	font-size: 550%;
 }
 
 .box:hover {
@@ -70,7 +71,7 @@ main {
 .br-br {
 	border-radius: 0 0 10px 0;
 }
-.xturn {
+.whose-turn {
 	margin-top: 2.5rem;
 	text-align: center;
 	font-size: 2.5rem;
