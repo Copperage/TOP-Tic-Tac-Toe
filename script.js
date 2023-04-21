@@ -26,6 +26,13 @@ const gameBoard = () => {
 
 			gameBoardArr[row][col] = currentPlayer;
 
+			//Update board
+			for (let i = 0; i < tttBoxes.length; i++) {
+				const row = Math.floor(i / 3);
+				const col = i % 3;
+				tttBoxes[i].textContent = gameBoardArr[row][col];
+			}
+
 			//Show whose turn it is after event listener is handled
 			currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
 
@@ -33,14 +40,94 @@ const gameBoard = () => {
 				? (playerMove.textContent = "Player 1's move")
 				: (playerMove.textContent = "Player 2's move");
 
-			//Update board
-			for (let i = 0; i < tttBoxes.length; i++) {
-				const row = Math.floor(i / 3);
-				const col = i % 3;
-				tttBoxes[i].textContent = gameBoardArr[row][col];
+			// Check winner
+			const gameResult = checkResult();
+			if (gameResult === (draw = true)) {
+				playerMove.textContent = "It's a tie!";
+			} else if (gameResult) {
+				playerMove.textContent = `Player ${gameResult === 'X' ? 1 : 2} wins!`;
+				return;
 			}
 		});
 	}
 };
+
+const checkResult = () => {
+	let winner;
+	let draw = true;
+
+	for (let i = 0; i < winningConds.length; i++) {
+		const [a, b, c] = winningConds[i];
+		if (
+			gameBoardArr[a[0]][a[1]] !== '' &&
+			gameBoardArr[a[0]][a[1]] === gameBoardArr[b[0]][b[1]] &&
+			gameBoardArr[a[0]][a[1]] === gameBoardArr[c[0]][c[1]]
+		) {
+			winner = gameBoardArr[a[0]][a[1]];
+			break;
+		}
+	}
+
+	for (let i = 0; i < gameBoardArr.length; i++) {
+		for (let j = 0; j < gameBoardArr[i].length; j++) {
+			if (gameBoardArr[i][j] === '') {
+				draw = false;
+				break;
+			}
+		}
+	}
+
+	if (draw && !winner) {
+		return (draw = true);
+	}
+	return winner;
+};
+
+//Winning conditions
+const winningConds = [
+	// horizontal
+	[
+		[0, 0],
+		[0, 1],
+		[0, 2],
+	],
+	[
+		[1, 0],
+		[1, 1],
+		[1, 2],
+	],
+	[
+		[2, 0],
+		[2, 1],
+		[2, 2],
+	],
+	// vertical
+	[
+		[0, 0],
+		[1, 0],
+		[2, 0],
+	],
+	[
+		[0, 1],
+		[1, 1],
+		[2, 1],
+	],
+	[
+		[0, 2],
+		[1, 2],
+		[2, 2],
+	],
+	// diagonal
+	[
+		[0, 0],
+		[1, 1],
+		[2, 2],
+	],
+	[
+		[0, 2],
+		[1, 1],
+		[2, 0],
+	],
+];
 
 gameBoard();
