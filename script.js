@@ -58,12 +58,14 @@ const checkResult = () => {
 
 	for (let i = 0; i < winningConds.length; i++) {
 		const [a, b, c] = winningConds[i];
-		if (
-			gameBoardArr[a[0]][a[1]] !== '' &&
-			gameBoardArr[a[0]][a[1]] === gameBoardArr[b[0]][b[1]] &&
-			gameBoardArr[a[0]][a[1]] === gameBoardArr[c[0]][c[1]]
-		) {
-			winner = gameBoardArr[a[0]][a[1]];
+
+		//Find out the value of each cell
+		const firstNum = gameBoardArr[Math.floor(a / 3)][a % 3];
+		const secondNum = gameBoardArr[Math.floor(b / 3)][b % 3];
+		const thirdNum = gameBoardArr[Math.floor(c / 3)][c % 3];
+
+		if (firstNum !== '' && firstNum == secondNum && firstNum == thirdNum) {
+			winner = firstNum;
 			break;
 		}
 	}
@@ -85,14 +87,14 @@ const checkResult = () => {
 
 //Winning conditions
 const winningConds = [
-	[0, 1, 2],
-	[3, 4, 5],
-	[6, 7, 8],
-	[0, 3, 6],
-	[1, 4, 7],
-	[2, 5, 8],
-	[0, 4, 8],
-	[2, 4, 6],
+	[0, 1, 2], // Top row
+	[3, 4, 5], // Middle row
+	[6, 7, 8], // Bottom row
+	[0, 3, 6], // Left column
+	[1, 4, 7], // Middle column
+	[2, 5, 8], // Right column
+	[0, 4, 8], // TL to BR diagonally
+	[2, 4, 6], // TR to BL diagonally
 ];
 
 gameBoard();
