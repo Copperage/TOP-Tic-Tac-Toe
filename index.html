@@ -9,25 +9,43 @@
 		<title>Tic-Tac-Toe</title>
 	</head>
 	<body>
+		<div class="name-entry modal">
+			<form>
+				<div class="text-wrapper">
+					<span>Enter your names</span>
+				</div>
+				<div class="input-wrapper">
+					<label for="player1">Player 1's Name?</label>
+					<input type="text" id="player1" name="player1" required />
+				</div>
+				<div class="input-wrapper">
+					<label for="player1">Player 2's Name?</label>
+					<input type="text" id="player2" name="player2" required />
+				</div>
+				<div class="button-container">
+					<button id="start" type="submit">Start Game</button>
+				</div>
+			</form>
+		</div>
 		<header class="header-container">
 			<h1>Tic-Tac-Toe</h1>
 			<h2></h2>
 		</header>
 		<main>
 			<div class="game-container">
-				<button class="box no-l br-tl"></button>
+				<button class="box br-tl"></button>
 				<button class="box"></button>
 				<button class="box br-tr"></button>
-				<button class="box no-l"></button>
 				<button class="box"></button>
 				<button class="box"></button>
-				<button class="box no-l no-b br-bl"></button>
-				<button class="box no-b"></button>
-				<button class="box no-b br-br"></button>
+				<button class="box"></button>
+				<button class="box br-bl"></button>
+				<button class="box"></button>
+				<button class="box br-br"></button>
 			</div>
 
 			<div class="turn-container">
-				<h2 class="whose-turn">Player 1's move</h2>
+				<h2 class="whose-turn"></h2>
 			</div>
 		</main>
 	</body>

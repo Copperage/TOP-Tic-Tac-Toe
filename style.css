@@ -4,9 +4,99 @@
 	font-size: 24px;
 }
 
+:root {
+	--font-color: #faf9f6;
+	--bg-color: rgb(20, 20, 20);
+	--modal-color: rgb(10, 10, 10, 0.95);
+	--transparent-color: rgba(255, 255, 255, 0.1);
+}
+
 body {
+	font-family: Arial, Helvetica, sans-serif;
 	display: grid;
 	grid-template-rows: 0.5fr 1.5fr;
+	background-color: var(--bg-color);
+	color: var(--font-color);
+}
+
+.modal {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	overflow: auto;
+}
+
+.fade-anim {
+	opacity: 0;
+	transition: opacity 250ms ease-in-out;
+}
+
+.modal form {
+	position: relative;
+	background-color: var(--modal-color);
+	padding: 1rem;
+	width: 100%;
+	max-width: 400px;
+	height: fit-content;
+	border-radius: 25px;
+	border: 1px solid var(--transparent-color);
+}
+
+.modal form .text-wrapper {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(-4%, -18%);
+	box-sizing: border-box;
+}
+
+.modal form span {
+	font-weight: 900;
+	font-size: 32px;
+	text-transform: uppercase;
+	font-style: italic;
+	color: var(--transparent-color);
+}
+
+.input-wrapper {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0;
+}
+
+.input-wrapper label {
+	font-size: 22px;
+	line-height: 1.5;
+	color: var(--font-color);
+}
+
+.modal input {
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+	font-size: 18px;
+	outline: none;
+	background-color: var(--bg-color);
+	color: var(--font-color);
+}
+
+.modal .button-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
+}
+
+.modal button {
+	cursor: pointer;
+	padding: 5px 15px;
+	border-radius: 25px;
+	border: none;
+	background-color: var(--transparent-color);
+	color: var(--font-color);
 }
 
 .header-container {
@@ -25,35 +115,33 @@ main {
 	display: grid;
 	width: 500px;
 	height: 500px;
-	border: 1px solid black;
-	border-radius: 10px;
+	text-shadow: none;
+	box-shadow: none;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-areas:
 		'. . .'
 		'. . .'
 		'. . .';
+	filter: blur(0);
+	transition: 250ms ease-in-out;
+}
+
+.container-blur {
+	filter: blur(5px);
 }
 
 .box {
 	display: grid;
-	border-left: 1px solid black;
-	border-bottom: 1px solid black;
-	background-color: rgb(255, 255, 255);
+	border: 1px solid var(--font-color);
 	border-style: solid;
-	font-size: 550%;
+	font-size: 5.5rem;
+	background-color: var(--bg-color);
+	color: var(--font-color);
 }
 
 .box:hover {
-	background-color: rgb(240, 240, 240);
-}
-
-.no-l {
-	border-left: 0;
-}
-
-.no-b {
-	border-bottom: 0;
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 .br-tl {
@@ -71,6 +159,7 @@ main {
 .br-br {
 	border-radius: 0 0 10px 0;
 }
+
 .whose-turn {
 	margin-top: 2.5rem;
 	text-align: center;

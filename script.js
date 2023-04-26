@@ -2,6 +2,10 @@
 const tttBoxes = document.querySelectorAll('.box');
 const tttBoard = document.querySelector('.game-container');
 const playerMove = document.querySelector('.whose-turn');
+const modalBox = document.querySelector('.name-entry');
+const p1Input = document.getElementById('player1');
+const p2Input = document.getElementById('player2');
+const startButton = document.getElementById('start');
 
 //Game board init
 let gameBoardArr = [
@@ -12,8 +16,26 @@ let gameBoardArr = [
 
 let currentPlayer = 'X';
 
+//Pre-setup
+startButton.addEventListener('click', () => {
+	const p1Name = p1Input.value;
+	const p2Name = p2Input.value;
+
+	playerMove.textContent = `${p1Name}'s move`;
+
+	modalBox.classList.add('fade-anim');
+	tttBoard.classList.remove('container-blur');
+
+	setTimeout(() => {
+		modalBox.style.display = 'none';
+	}, 260);
+
+	event.preventDefault();
+	gameBoard(p1Name, p2Name);
+});
+
 //Set up the gameboard
-const gameBoard = () => {
+const gameBoard = (p1Name, p2Name) => {
 	//Add event listeners to the gameboard
 	for (let i = 0; i < tttBoxes.length; i++) {
 		tttBoxes[i].addEventListener('click', () => {
@@ -36,22 +58,29 @@ const gameBoard = () => {
 			//Show whose turn it is after event listener is handled
 			currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
 
+			playerMove.textContent = `${p1Name}'s move`;
+
 			currentPlayer === 'X'
-				? (playerMove.textContent = "Player 1's move")
-				: (playerMove.textContent = "Player 2's move");
+				? (playerMove.textContent = `${p1Name}'s move`)
+				: (playerMove.textContent = `${p2Name}'s move`);
 
 			// Check winner
 			const gameResult = checkResult();
 			if (gameResult === (draw = true)) {
 				playerMove.textContent = "It's a tie!";
 			} else if (gameResult) {
-				playerMove.textContent = `Player ${gameResult === 'X' ? 1 : 2} wins!`;
+				playerMove.textContent = `${
+					gameResult === 'X'
+						? (playerMove.textContent = `${p1Name}`)
+						: (playerMove.textContent = `${p2Name}`)
+				} wins!`;
 				return;
 			}
 		});
 	}
 };
 
+//Winner conditions and algo
 const checkResult = () => {
 	let winner;
 	let draw = true;
@@ -85,7 +114,6 @@ const checkResult = () => {
 	return winner;
 };
 
-//Winning conditions
 const winningConds = [
 	[0, 1, 2], // Top row
 	[3, 4, 5], // Middle row
@@ -97,4 +125,6 @@ const winningConds = [
 	[2, 4, 6], // TR to BL diagonally
 ];
 
-gameBoard();
+modalBox.style.display = 'flex';
+modalBox.classList.remove('fade-anim');
+tttBoard.classList.add('container-blur');
