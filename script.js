@@ -15,6 +15,7 @@ let gameBoardArr = [
 ];
 
 let currentPlayer = 'X';
+let gameOver = false;
 
 //Pre-setup
 startButton.addEventListener('click', () => {
@@ -39,6 +40,11 @@ const gameBoard = (p1Name, p2Name) => {
 	//Add event listeners to the gameboard
 	for (let i = 0; i < tttBoxes.length; i++) {
 		tttBoxes[i].addEventListener('click', () => {
+			if (gameOver) {
+				console.log('Error: A winner has been declared');
+				return;
+			}
+
 			const row = Math.floor(i / 3);
 			const col = i % 3;
 
@@ -64,7 +70,7 @@ const gameBoard = (p1Name, p2Name) => {
 				? (playerMove.textContent = `${p1Name}'s move`)
 				: (playerMove.textContent = `${p2Name}'s move`);
 
-			// Check winner
+			//Check winner
 			const gameResult = checkResult();
 			if (gameResult === (draw = true)) {
 				playerMove.textContent = "It's a tie!";
@@ -74,6 +80,7 @@ const gameBoard = (p1Name, p2Name) => {
 						? (playerMove.textContent = `${p1Name}`)
 						: (playerMove.textContent = `${p2Name}`)
 				} wins!`;
+
 				return;
 			}
 		});
@@ -95,6 +102,7 @@ const checkResult = () => {
 
 		if (firstNum !== '' && firstNum == secondNum && firstNum == thirdNum) {
 			winner = firstNum;
+			gameOver = true;
 			break;
 		}
 	}
@@ -110,6 +118,7 @@ const checkResult = () => {
 
 	if (draw && !winner) {
 		return (draw = true);
+		gameOver = true;
 	}
 	return winner;
 };
