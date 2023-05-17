@@ -17,6 +17,8 @@ body {
 	grid-template-rows: 0.5fr 1.5fr;
 	background-color: var(--bg-color);
 	color: var(--font-color);
+	height: 100%;
+	width: 100%;
 }
 
 .modal {
