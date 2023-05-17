@@ -11,11 +11,14 @@
 	--transparent-color: rgba(255, 255, 255, 0.1);
 }
 
+html {
+	background-color: var(--bg-color);
+}
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	display: grid;
 	grid-template-rows: 0.5fr 1.5fr;
-	background-color: var(--bg-color);
 	color: var(--font-color);
 	height: 100%;
 	width: 100%;
